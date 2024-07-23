@@ -1,0 +1,27 @@
+{
+  "name": "mongodb",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "scripts": {
+    "devStart": "nodemon main.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "devDependencies": {
+    "@types/nconf": "^0.10.6",
+    "@types/node": "^20.14.11",
+    "nodemon": "^3.1.4",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.5.3"
+  },
+  "dependencies": {
+    "@types/express": "^4.17.21",
+    "@types/mongoose": "^5.11.97",
+    "csv-parser": "^3.0.0",
+    "express": "^4.19.2",
+    "mongoose": "^8.5.1",
+    "nconf": "^0.12.1"
+  }
+}

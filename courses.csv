@@ -1,0 +1,13 @@
+Level,name,prelevel,preName
+SSC,Maths
+SSC,Science
+SSC,English
+Inter,MPC,SSC,Maths
+Inter,BiPC,SSC,Science
+Degree,Bcom,Inter,anyGroup
+Degree,Mpcs,Inter,MPC
+Degree,Bsc,Inter,anyGroup
+B.Tech,CSE,Inter,MPC
+B.Tech,ECE,Inter,MPC
+B.Tech,EEE,Inter,MPC
+M.Tech,DataScience,B.Tech,CSE
