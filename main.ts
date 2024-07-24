@@ -2,8 +2,8 @@ import mongoose from "mongoose"
 import connection from "./connection";
 import * as fs from 'fs'; 
 import * as path from 'path';
-import courses from "./courses"
-//import courses.prerequisite from "./courses"
+import Courses from "./courses"
+//import Courses.prerequisite from "./Courses"
 import { AnyFunction } from "sequelize/types/utils";
 //import * as nconf from 'nconf';
 
@@ -62,19 +62,10 @@ async function main(): Promise<void> {
       }
   
       const courseData: courses[] = await readCSVFile(coursesDataPath);
-      //await course.bulkCreate()
-     // console.log(courseData);
-    //  course.insertMany(courseData)
-    // .then(docs => {
-    //     console.log('Courses inserted:', docs);
-    //     mongoose.connection.close();
-    // })
-    // .catch(err => {
-    //     console.error('Error inserting courses:', err);
-    // });
+     
     for(const record of courseData){
-      console.log(record);
-       await insertDocuments(record);
+      // console.log(record);
+      // await insertDocuments(record);
     }
        
     }
@@ -86,22 +77,23 @@ async function main(): Promise<void> {
 async function insertDocuments(record: any){
     try {
       const { Level, name, pre_level, pre_course } =record;
-      let course = await courses.findOne({Level, name})
-      console.log(`${name}, ${Level}`);
-      // if(pre_level && pre_course){
-      //     const prerequisite: any = await courses.findOne(pre_level, pre_course );
-      //     const preId = prerequisite
-
-      // }
-      if (course==null) {
-        course = await courses.create({ Level, name });
+      // console.log(pre_level);
+      let course:any = await Courses.findOne({Level:Level,name:name})
+   
+     
+      if (!course) {
+        
+        course = await Courses.create({ Level:Level,name:name});
+        await course.save();
         console.log(`Inserted course: ${name} (${Level})`);
     }
 
     if (pre_level && pre_course) {
-        let preCourse = await courses.findOne({ name: pre_course, level: pre_level });
+
+        let preCourse = await Courses.findOne({ name: pre_course, Level: pre_level });
         if (!preCourse) {
-            preCourse = await courses.create({ name: pre_course, level: pre_level });
+            preCourse = await Courses.create({ name: pre_course, Level: pre_level });
+            await preCourse.save();
             console.log(` prerequisite course created: ${pre_course} (${pre_level})`);
         } else  {
             course.prerequisite.push(preCourse._id);
